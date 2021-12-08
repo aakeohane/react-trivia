@@ -202,6 +202,6 @@ a {
   }
 
   .quiz-container {
-    padding: 20px 20px 100px 20px;
+    margin: 0 auto;
   }
 }
