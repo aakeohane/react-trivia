@@ -123,14 +123,14 @@ function App() {
           <ButtonOne
             fixedAnswers={fixedAnswers}
             id={item.id}
+            key={item.id}
             index={item.index}
             isCorrect={item.isCorrect}
             answered={answered}
             choices={choices}
             setChoices={setChoices}
             setButtonGroupOne={setButtonGroupOne}
-            activeOne={buttonGroupOne.isActive === item.id ? true : false}
-              />
+            activeOne={buttonGroupOne === item.id ? true : false} />
         )
       }
       if (item.index === 1)
@@ -138,6 +138,7 @@ function App() {
           <ButtonTwo
             fixedAnswers={fixedAnswers}
             id={item.id}
+            key={item.id}
             index={item.index}
             isCorrect={item.isCorrect}
             choices={choices}
@@ -151,6 +152,7 @@ function App() {
           <ButtonThree
             fixedAnswers={fixedAnswers}
             id={item.id}
+            key={item.id}
             index={item.index}
             isCorrect={item.isCorrect}
             choices={choices}
@@ -165,6 +167,7 @@ function App() {
             fixedAnswers={fixedAnswers}
             id={item.id}
             index={item.index}
+            key={item.id}
             isCorrect={item.isCorrect}
             choices={choices}
             setChoices={setChoices}
@@ -177,6 +180,7 @@ function App() {
           <ButtonFive
             fixedAnswers={fixedAnswers}
             id={item.id}
+            key={item.id}
             index={item.index}
             isCorrect={item.isCorrect}
             choices={choices}
@@ -187,10 +191,11 @@ function App() {
         )
         })
         return (
+          
           <div className="question-group">
-          <p className="question">{questions}</p>
-          <div className="button-container">{answerButtons}</div>
-        </div>
+            <p className="question">{questions}</p>
+            <div className="button-container">{answerButtons}</div>
+          </div>
         )
       })
 

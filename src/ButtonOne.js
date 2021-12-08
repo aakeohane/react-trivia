@@ -3,12 +3,11 @@ import React from "react";
 const ButtonOne = props => {
 
    const clickHandlerOne = () => {
-      props.setButtonGroupOne({...props.buttonGroupOne, isActive: props.id, isPicked: !props.isPicked})
+      props.setButtonGroupOne(props.id)
       const newChoices = [...props.choices]
       newChoices.splice(0,1, props.fixedAnswers)
       props.setChoices(newChoices)
    }
-   
 
    const active = props.activeOne
 

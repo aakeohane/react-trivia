@@ -132,23 +132,7 @@ body {
   font-weight: 800;
 }
 
-@media all and (min-width: 480px) {
-  .answers-btn {
-    padding: 10px 25px;
-  }
-}
-
-/* the stupid galaxy fold and other phones */
-@media all and (max-width: 380px) {
-  .button-container {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .answers-btn {
-    margin: 5px;
-    padding: 10px 20px;
-  }
-}
+/* button stylings */
 
 .blue {
   background-color: #d6dbf5;
@@ -167,4 +151,22 @@ body {
 .red {
   background-color: #f7b2b5;
   opacity: 0.6;
+}
+
+@media all and (min-width: 480px) {
+  .answers-btn {
+    padding: 10px 25px;
+  }
+}
+
+/* the stupid galaxy fold and other phones */
+@media all and (max-width: 380px) {
+  .button-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .answers-btn {
+    margin: 5px;
+    padding: 10px 20px;
+  }
 }
