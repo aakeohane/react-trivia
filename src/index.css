@@ -1,11 +1,12 @@
 body {
   margin: 0;
   background-color: #f5f7fb;
+  height: 100%;
 }
 
 .landing-container {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -70,6 +71,7 @@ a {
 .content {
   max-width: 300px;
   padding: 15px;
+  margin-bottom: 80px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -111,7 +113,7 @@ a {
   display: flex;
   flex-direction: column;
   align-content: center;
-  padding: 20px 20px 80px 20px;
+  padding: 20px 20px 40px 20px;
   max-width: 500px;
   font-family: "Karla";
   font-weight: 800;
@@ -121,7 +123,7 @@ a {
 }
 
 .quiz-container > .quizzical-button {
-  margin: 15px auto;
+  margin: 20px auto;
 }
 
 .question-group {
@@ -197,5 +199,9 @@ a {
   .answers-btn {
     margin: 5px;
     padding: 10px 20px;
+  }
+
+  .quiz-container {
+    padding: 20px 20px 100px 20px;
   }
 }
