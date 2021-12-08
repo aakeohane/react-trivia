@@ -37,8 +37,39 @@ body {
   background-color: #deebf8;
 }
 
+.quizzical-logo {
+  max-width: 100px;
+  width: 100%;
+  margin-bottom: 10px;
+  filter: invert(87%) sepia(6%) saturate(780%) hue-rotate(195deg)
+    brightness(101%) contrast(70%);
+}
+
+.footer {
+  font-family: "Karla", sans-serif;
+  font-weight: 800;
+  position: absolute;
+  bottom: 0;
+  height: 1.6rem;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-content: center;
+  color: #4d5b9e;
+  left: 0;
+  right: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #293264;
+}
+
 .content {
   max-width: 300px;
+  margin-bottom: 80px;
   padding: 15px;
   text-align: center;
   display: flex;
@@ -59,7 +90,7 @@ body {
 .content p {
   color: #293264;
   font-weight: 400;
-  margin: 20px 0;
+  margin: 20px 0 26px 0;
 }
 
 .quizzical-button {

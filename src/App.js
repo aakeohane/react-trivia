@@ -1,36 +1,34 @@
-import LandingPage from './components/LandingPage'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import ButtonOne from './ButtonOne'
-import ButtonTwo from './ButtonTwo'
-import ButtonThree from './ButtonThree'
-import ButtonFour from './ButtonFour'
-import ButtonFive from './ButtonFive'
+import LandingPage from './components/LandingPage'
+import ButtonOne from './components/ButtonOne'
+import ButtonTwo from './components/ButtonTwo'
+import ButtonThree from './components/ButtonThree'
+import ButtonFour from './components/ButtonFour'
+import ButtonFive from './components/ButtonFive'
 import { nanoid } from 'nanoid'
 
 function App() {
 
   // if button is clicked change color, remove color and add
-  // color is another button is clicked
+  // color if another button is clicked
+  //  I struggled with this part of the code and could not find a solution without creating
+  // separate components and state for each group of answers
   const [buttonGroupOne, setButtonGroupOne] = useState(0)
   const [buttonGroupTwo, setButtonGroupTwo] = useState(0)
   const [buttonGroupThreee, setButtonGroupThree] = useState(0)
   const [buttonGroupFour, setButtonGroupFour] = useState(0)
   const [buttonGroupFive, setButtonGroupFive] = useState(0)
   
-
-
   const [buttonArray, setButtonArray] = useState([])
-
-  const [message, setMessage] = useState(false)
-  
 
   const [quiz, setQuiz] = useState(false)
   const [quizData, setQuizData] = useState([])
-
+  
   // this initial array needs to have five blank string so they can be replaced by users quiz choices
   const initialChoicesArray = ['', '', '', '', '']
-
+  
+  const [message, setMessage] = useState(false)
   const[count, setCount] = useState(0)
   const [correctAnswers, setCorrectAnswers] = useState([])
   const [choices, setChoices] = useState(initialChoicesArray)
@@ -175,7 +173,7 @@ function App() {
             setButtonGroupFour={setButtonGroupFour}
             activeFour={buttonGroupFour === item.id ? true : false} />
         )
-      if (item.index === 4)
+      else if (item.index === 4)
         return  (
           <ButtonFive
             fixedAnswers={fixedAnswers}
@@ -189,15 +187,15 @@ function App() {
             setButtonGroupFive={setButtonGroupFive}
             activeFive={buttonGroupFive === item.id ? true : false} />
         )
-        })
-        return (
-          
-          <div className="question-group">
-            <p className="question">{questions}</p>
-            <div className="button-container">{answerButtons}</div>
-          </div>
-        )
-      })
+    })
+      return (
+        
+        <div className="question-group">
+          <p className="question">{questions}</p>
+          <div className="button-container">{answerButtons}</div>
+        </div>
+      )
+  })
 
   const resetGame = () => {
     setQuiz(false)
