@@ -69,7 +69,6 @@ a {
 
 .content {
   max-width: 300px;
-  margin-bottom: 80px;
   padding: 15px;
   text-align: center;
   display: flex;
@@ -112,8 +111,7 @@ a {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin: auto;
-  margin: 0 18px;
+  padding: 20px 20px 80px 20px;
   max-width: 500px;
   font-family: "Karla";
   font-weight: 800;
