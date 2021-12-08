@@ -1,32 +1,28 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
 import LandingPage from './components/LandingPage'
-import ButtonOne from './components/ButtonOne'
-import ButtonTwo from './components/ButtonTwo'
-import ButtonThree from './components/ButtonThree'
-import ButtonFour from './components/ButtonFour'
-import ButtonFive from './components/ButtonFive'
+import ButtonGroups from './components/ButtonGroups'
 import { nanoid } from 'nanoid'
 
 function App() {
 
+  // this initial array needs to have five blank string so they can be replaced by users quiz choices
+  const initialChoicesArray = ['', '', '', '', '']
+  const initialButtonGroupArray = [0, 0, 0, 0, 0]
+  
+  
+  //  I struggled with this part of the code and could not find a solution without creating
+  // separate components and state for each group of answers until I learned how to manipulate
+  // the arrays based on index similar to choices array. May also add each as a property to further consolidate state
   // if button is clicked change color, remove color and add
   // color if another button is clicked
-  //  I struggled with this part of the code and could not find a solution without creating
-  // separate components and state for each group of answers
-  const [buttonGroupOne, setButtonGroupOne] = useState(0)
-  const [buttonGroupTwo, setButtonGroupTwo] = useState(0)
-  const [buttonGroupThreee, setButtonGroupThree] = useState(0)
-  const [buttonGroupFour, setButtonGroupFour] = useState(0)
-  const [buttonGroupFive, setButtonGroupFive] = useState(0)
+  const [buttonGroup, setButtonGroup] = useState(initialButtonGroupArray)
   
   const [buttonArray, setButtonArray] = useState([])
 
   const [quiz, setQuiz] = useState(false)
   const [quizData, setQuizData] = useState([])
   
-  // this initial array needs to have five blank string so they can be replaced by users quiz choices
-  const initialChoicesArray = ['', '', '', '', '']
   
   const [message, setMessage] = useState(false)
   const[count, setCount] = useState(0)
@@ -34,8 +30,7 @@ function App() {
   const [choices, setChoices] = useState(initialChoicesArray)
 
   const [answered, setAnswered] = useState(false)
-  console.log(answered)
-  console.log(quizData)
+ 
   
   useEffect(() => {
     if (!quiz) {
@@ -111,14 +106,13 @@ function App() {
 
   const quizQuestions = buttonArray.map(item => {
     const unicodeQ = item.question
-    const questions = unicodeQ.replace(/&quot;/g,'"').replace(/&#039;/g, "'").replace(/&amp;/g, "&").replace(/&rsquo;/g, "").replace(/&oacute;/g,'Ó').replace(/&uacute;/g, 'ú')
+    const questions = unicodeQ.replace(/&quot;/g,'"').replace(/&#039;/g, "'")
+      .replace(/&amp;/g, "&").replace(/&rsquo;/g, "").replace(/&oacute;/g,'Ó').replace(/&uacute;/g, 'ú').replace(/&eacute;/g, 'é')
     const answerButtons = item.answers.map(item => {
       const unicodeA = item.name
-      const fixedAnswers = unicodeA.replace(/&quot;/g,'"').replace(/&#039;/g, "'").replace(/&amp;/g, "&").replace(/&oacute;/g,'Ó').replace(/&uacute;/g, 'ú')
-      
-      if (item.index === 0) {
+      const fixedAnswers = unicodeA.replace(/&quot;/g,'"').replace(/&#039;/g, "'").replace(/&amp;/g, "&").replace(/&oacute;/g,'Ó').replace(/&uacute;/g, 'ú').replace(/&eacute;/g, 'é')
         return (
-          <ButtonOne
+          <ButtonGroups
             fixedAnswers={fixedAnswers}
             id={item.id}
             key={item.id}
@@ -127,69 +121,12 @@ function App() {
             answered={answered}
             choices={choices}
             setChoices={setChoices}
-            setButtonGroupOne={setButtonGroupOne}
-            activeOne={buttonGroupOne === item.id ? true : false} />
-        )
-      }
-      if (item.index === 1)
-        return  (
-          <ButtonTwo
-            fixedAnswers={fixedAnswers}
-            id={item.id}
-            key={item.id}
-            index={item.index}
-            isCorrect={item.isCorrect}
-            choices={choices}
-            answered={answered}
-            setChoices={setChoices}
-            setButtonGroupTwo={setButtonGroupTwo}
-            activeTwo={buttonGroupTwo === item.id ? true : false} />
-        )
-      if (item.index === 2)
-        return  (
-          <ButtonThree
-            fixedAnswers={fixedAnswers}
-            id={item.id}
-            key={item.id}
-            index={item.index}
-            isCorrect={item.isCorrect}
-            choices={choices}
-            setChoices={setChoices}
-            answered={answered}
-            setButtonGroupThree={setButtonGroupThree}
-            activeThree={buttonGroupThreee === item.id ? true : false} />
-        )
-      if (item.index === 3)
-        return  (
-          <ButtonFour
-            fixedAnswers={fixedAnswers}
-            id={item.id}
-            index={item.index}
-            key={item.id}
-            isCorrect={item.isCorrect}
-            choices={choices}
-            setChoices={setChoices}
-            answered={answered}
-            setButtonGroupFour={setButtonGroupFour}
-            activeFour={buttonGroupFour === item.id ? true : false} />
-        )
-      else if (item.index === 4)
-        return  (
-          <ButtonFive
-            fixedAnswers={fixedAnswers}
-            id={item.id}
-            key={item.id}
-            index={item.index}
-            isCorrect={item.isCorrect}
-            choices={choices}
-            setChoices={setChoices}
-            answered={answered}
-            setButtonGroupFive={setButtonGroupFive}
-            activeFive={buttonGroupFive === item.id ? true : false} />
+            buttonGroup={buttonGroup}
+            setButtonGroup={setButtonGroup}
+            active={buttonGroup[item.index] === item.id ? true : false} />
         )
     })
       return (
-        
         <div className="question-group">
           <p className="question">{questions}</p>
           <div className="button-container">{answerButtons}</div>
@@ -204,7 +141,6 @@ function App() {
     // have to reset choices state
     setChoices(initialChoicesArray)
   }
-  console.log(choices)
 
   return (
     <div className="App">
