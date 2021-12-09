@@ -198,7 +198,7 @@ a {
 /* the stupid galaxy fold and other phones */
 @media all and (max-width: 414px) {
   .button-container {
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
   }
   .answers-btn {
     margin-right: 15px;
