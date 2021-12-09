@@ -198,11 +198,11 @@ a {
 /* the stupid galaxy fold and other phones */
 @media all and (max-width: 414px) {
   .button-container {
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
   }
   .answers-btn {
-    margin: 5px;
-    padding: 8px 15px;
+    margin-right: 15px;
+    padding: 8px 18px;
   }
 
   .quiz-container {
