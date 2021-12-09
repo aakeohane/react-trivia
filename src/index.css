@@ -164,6 +164,10 @@ a {
   font-weight: 800;
 }
 
+.play-again-container p {
+  margin: 0 10px;
+}
+
 /* button stylings */
 
 .blue {
@@ -187,22 +191,26 @@ a {
 
 @media all and (min-width: 480px) {
   .answers-btn {
-    padding: 10px 25px;
+    padding: 8px 25px;
   }
 }
 
 /* the stupid galaxy fold and other phones */
-@media all and (max-width: 380px) {
+@media all and (max-width: 414px) {
   .button-container {
     flex-wrap: wrap;
-    justify-content: center;
   }
   .answers-btn {
     margin: 5px;
-    padding: 10px 20px;
+    padding: 8px 15px;
   }
 
   .quiz-container {
     margin: 0 auto;
+  }
+
+  .play-again-container button {
+    max-width: 140px;
+    width: 100%;
   }
 }

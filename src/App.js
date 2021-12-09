@@ -5,6 +5,7 @@ import ButtonGroups from './components/ButtonGroups'
 import { nanoid } from 'nanoid'
 
 function App() {
+  // add categories and more options for future iterations
 
   // this initial array needs to have five blank string so they can be replaced by users quiz choices
   const initialChoicesArray = ['', '', '', '', '']
