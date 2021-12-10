@@ -14,7 +14,7 @@ export default function LandingPage(props) {
         <button className="quizzical-button" onClick={props.onStart}> Start quiz!</button>
       </div>
       <div className="footer">
-        <footer> Meticulously coded by <a href="https://github.com/aakeohane/react-trivia" rel="noreferrer" target="_blank">Aaron</a></footer>
+        <footer> Meticulously made by <a href="https://github.com/aakeohane/react-trivia" rel="noreferrer" target="_blank">Aaron</a></footer>
       </div>
     </div>
   )
