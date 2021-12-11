@@ -1,34 +1,37 @@
-# Trivia App
+# Quizzical
 
-Solo project for testing my React skills and become even more familiar with JSX syntax, similar to React Pokedex, I will be calling an API and generating random trivia questions for you to answer.
+Solo project to further test my React skills and become even more familiar with JSX syntax, similar to React Pokedex, the quiz app calls from the Open Trivia Database and generated random trivia questions for the user to answer.
 
-# Getting Started with Create React App
+Project: [Quizzical](https://aakeohane.github.io/react-trivia/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features ✅
 
-## Available Scripts
+- Quiz Data is loaded from [the Open Trivia Database](https://opentdb.com/api_config.php)
+- Each random question is rendered to the DOM along with multiple choice answers rendered as reusable component buttons
+- This was a side project from [Scrimba](https://scrimba.com/)
+- Scrimba provided the [Figma mockup](https://www.figma.com/file/E9S5iPcm10f0RIHK8mCqKL/Quizzical-App?node-id=0%3A1) for the design for me to develop
+- The code was %100 developed by myself, solutions were not given
+- useEffect hook is used to avoid side effects while fetching JSON data in addition to storing my initial state for the quiz questions
 
-In the project directory, you can run:
+## Technologies
 
-### `npm start`
+- React
+- JSX
+- Figma
+- CSS
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Final Reflections
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+I built this project to really solidify my understanding of React. I used functional components again as this is much preferred.
 
-### `npm test`
+The styling was designed by Scrimba via Figma and it was my job to develop it into a working application. I thought this was great practice if I were to work with designers and then also implement the working code succesfully.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I can't say that this was easy for me as it was much more complicated than the Pokedex project which was relatively straightforward. I had to come up with solutions by googling and if that didnt help, thankfully, I would wake up at 4am with the solution out of nowhere. There may be better ways to approach some of the problems, however I am very proud of my personal growth with this project.
 
-### `npm run build`
+### Author
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[Aaron Keohane](https://aakeohane.github.io/Portfolio-Website/index.html)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Version
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1.0.2
