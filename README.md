@@ -10,7 +10,7 @@ Project: [Quizzical](https://aakeohane.github.io/react-trivia/)
 - Each random question is rendered to the DOM along with multiple choice answers rendered as reusable component buttons
 - This was a side project from [Scrimba](https://scrimba.com/)
 - Scrimba provided the [Figma mockup](https://www.figma.com/file/E9S5iPcm10f0RIHK8mCqKL/Quizzical-App?node-id=0%3A1) for the design for me to develop
-- The code was %100 developed by myself, solutions were not given
+- The code was 100% developed by myself, solutions were not given
 - useEffect hook is used to avoid side effects while fetching JSON data in addition to storing my initial state for the quiz questions
 
 ## Technologies
