@@ -26,7 +26,7 @@ function App() {
   
   
   const [message, setMessage] = useState(false)
-  const[count, setCount] = useState(0)
+  const [count, setCount] = useState(0)
   const [correctAnswers, setCorrectAnswers] = useState([])
   const [choices, setChoices] = useState(initialChoicesArray)
 
