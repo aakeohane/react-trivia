@@ -1,6 +1,6 @@
 # Quizzical
 
-Solo project to further test my React skills and become even more familiar with JSX syntax, similar to React Pokedex, the quiz app calls from the Open Trivia Database and generated random trivia questions for the user to answer.
+Solo project to further test my React skills and become even more familiar with JSX syntax, similar to React Pokedex, the quiz app calls from the Open Trivia Database and generates random trivia questions for the user to answer.
 
 Project: [Quizzical](https://aakeohane.github.io/react-trivia/)
 
