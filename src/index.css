@@ -174,7 +174,7 @@ a {
 
 .blue {
   background-color: #d6dbf5;
-  border: none;
+  border: 1.5px solid transparent;
 }
 
 .faded {
@@ -183,11 +183,12 @@ a {
 
 .green {
   background-color: #94d7a2;
-  border: none;
+  border: 1.5px solid transparent;
   opacity: 1;
 }
 .red {
   background-color: #f7b2b5;
+  border: 1.5px solid transparent;
   opacity: 0.6;
 }
 

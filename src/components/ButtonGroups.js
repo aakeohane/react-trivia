@@ -4,7 +4,7 @@ const ButtonGroups = props => {
   
   const [active, answered, isCorrect, fixedAnswers, index, id] = [props.active, props.answered, props.isCorrect, props.fixedAnswers, props.index, props.id]
 
-  const clickHandlerOne = () => {
+  const clickHandler = () => {
     // array for highlighting pick on click for each button group
     const buttonGroup = [...props.buttonGroup]
     buttonGroup.splice(index, 1, id)
@@ -29,7 +29,7 @@ const ButtonGroups = props => {
           ${answered && isCorrect && 'green'} 
           ${active && answered && !isCorrect && 'red'}
           `}
-          onClick={() => clickHandlerOne()}
+          onClick={() => clickHandler()}
           disabled={answered ? true : false}
           key={id} >
         {fixedAnswers}
