@@ -103,6 +103,7 @@ a {
   border: none;
   font-family: "Inter", sans-serif;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .quizzical-button:hover {
