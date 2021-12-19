@@ -148,6 +148,7 @@ a {
   color: #293264;
   margin-right: 15px;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .message {
