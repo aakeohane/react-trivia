@@ -34,4 +34,4 @@ I can't say that this was easy for me as it was much more complicated than the P
 
 ### Version
 
-1.0.2
+1.0.3
