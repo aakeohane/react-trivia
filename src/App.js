@@ -11,7 +11,6 @@ function App() {
   const initialChoicesArray = ['', '', '', '', '']
   const initialButtonGroupArray = [0, 0, 0, 0, 0]
   
-  
   //  I struggled with this part of the code and could not find a solution without creating
   // separate components and state for each group of answers until I learned how to manipulate
   // the arrays based on index similar to choices array. May also add each as a property to further consolidate state
@@ -34,8 +33,12 @@ function App() {
  
   
   useEffect(() => {
+    // let difficulty = '&difficulty=easy'
+    // let category = '&category=19'
+    let url = `https://opentdb.com/api.php?amount=5`
+    console.log(url)
     if (!quiz) {
-    fetch("https://opentdb.com/api.php?amount=5")
+    fetch(url)
       .then(res => res.json())
       .then(data => setQuizData(data.results))
     }
@@ -106,15 +109,16 @@ function App() {
   }
 
   const quizQuestions = buttonArray.map(item => {
-    const unicodeQ = item.question
-    const questions = unicodeQ.replace(/&quot;/g,'"').replace(/&#039;/g, "'")
-      .replace(/&amp;/g, "&").replace(/&rsquo;/g, "").replace(/&oacute;/g,'Ó').replace(/&uacute;/g, 'ú').replace(/&eacute;/g, 'é')
+    const parsedQuestions = new DOMParser().parseFromString(item.question, "text/html")
+    // DOMParser is a nifty function to translate unicode into a document object, so you have to pull the textcontent
+    // out using body.firstChild.textContent
+    const questions = parsedQuestions.body.firstChild.textContent
     const answerButtons = item.answers.map(item => {
-      const unicodeA = item.name
-      const fixedAnswers = unicodeA.replace(/&quot;/g,'"').replace(/&#039;/g, "'").replace(/&amp;/g, "&").replace(/&oacute;/g,'Ó').replace(/&uacute;/g, 'ú').replace(/&eacute;/g, 'é')
+      const parsedAnswers = new DOMParser().parseFromString(item.name, "text/html")
+      const answers = parsedAnswers.body.firstChild.textContent
         return (
           <ButtonGroups
-            fixedAnswers={fixedAnswers}
+            fixedAnswers={answers}
             id={item.id}
             key={item.id}
             index={item.index}
@@ -135,6 +139,8 @@ function App() {
       )
   })
 
+  console.log(choices)
+  console.log(buttonGroup)
   const resetGame = () => {
     setQuiz(false)
     setAnswered(false)
