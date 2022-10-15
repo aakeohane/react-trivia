@@ -7,18 +7,18 @@ const ButtonGroups = props => {
   const clickHandler = () => {
     // array for highlighting pick on click for each button group
     props.setButtonGroup(prevState => [
-      ...props.buttonGroup, props.buttonGroup.splice(index, 1, id)
+      ...props.buttonGroup, prevState.splice(index, 1, id)
     ])
 
     // array for storing chosen answer
-    const newChoices = [...props.choices]
-    newChoices.splice(index, 1, fixedAnswers)
-    props.setChoices(newChoices)
+    // const newChoices = [...props.choices]
+    // newChoices.splice(index, 1, fixedAnswers)
+    // props.setChoices(newChoices)
 
-    // prevState adds weird Array(1) at end of array but still works above is cleaner on console??
-    // props.setChoices(prevState => [
-    //   ...props.choices, props.choices.splice(index, 1, fixedAnswers)
-    // ])
+    // splice adds weird Array(1), returning empty array i think, at end of array but still works above is cleaner on console??
+    props.setChoices(prevState => [
+      ...props.choices, prevState.splice(index, 1, fixedAnswers)
+    ])
   }
 
     return (

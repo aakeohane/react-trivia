@@ -7,9 +7,8 @@ import { nanoid } from 'nanoid'
 function App() {
   // I may add categories and more options for future iterations
 
-  // this initial array needs to have five blank string so they can be replaced by users quiz choices
-  const initialChoicesArray = ['', '', '', '', '']
-  const initialButtonGroupArray = [0, 0, 0, 0, 0]
+  const initialChoicesArray = ['']
+  const initialButtonGroupArray = [0]
   
   //  I struggled with this part of the code and could not find a solution without creating
   // separate components and state for each group of answers until I learned how to manipulate
@@ -36,7 +35,7 @@ function App() {
     // let difficulty = '&difficulty=easy'
     // let category = '&category=19'
     let url = `https://opentdb.com/api.php?amount=5`
-    console.log(url)
+    
     if (!quiz) {
     fetch(url)
       .then(res => res.json())
@@ -53,9 +52,11 @@ function App() {
     const bigArray = []
     const correctAnswerArray = []
     quizData.map((item, index) => {
-      const correctAnswers = item.correct_answer
+      const parsedCorrectAnswers = new DOMParser().parseFromString(item.correct_answer, "text/html")
+      const correctAnswers = parsedCorrectAnswers.body.firstChild.textContent
       correctAnswerArray.push(correctAnswers)
       setCorrectAnswers(correctAnswerArray)
+      console.log(correctAnswerArray)
       const wrongAnswers = item.incorrect_answers
       const wrongAnswersArray = wrongAnswers.map(item => {
         return {
@@ -86,17 +87,18 @@ function App() {
   }, [quizData])
 
   const checkAnswers = (correctAnswers, choices) => {
+    console.log(choices.filter(choice => typeof choice === 'string'))
     setCount(0)
-    if (choices.includes('')) {
-      setMessage(true)
-    }
     for (let i = 0; i < correctAnswers.length; i++){
       if (correctAnswers[i] === choices[i]) {
         setCount(prevState => prevState +1)
-      } else if (!choices.includes('')) {
-        setAnswered(true)
-        setMessage(false)
       }
+    }
+    if (choices.includes('')) {
+      setMessage(true)
+    } else {
+      setAnswered(true)
+      setMessage(false)
     }
   }
 
@@ -139,8 +141,6 @@ function App() {
       )
   })
 
-  console.log(choices)
-  console.log(buttonGroup)
   const resetGame = () => {
     setQuiz(false)
     setAnswered(false)
