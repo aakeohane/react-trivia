@@ -3,12 +3,19 @@ import { useEffect } from 'react'
 import LandingPage from './components/LandingPage'
 import ButtonGroups from './components/ButtonGroups'
 import { nanoid } from 'nanoid'
+import QuizCustomization from './components/QuizCustomization'
+import customizeIcon from './img/slider-icon.png'
 
 function App() {
   // I may add categories and more options for future iterations
 
-  const initialChoicesArray = ['']
+  const initialChoicesArray = ['','','','','']
   const initialButtonGroupArray = [0]
+  
+  const [visible, isVisible] = useState(false)
+  const [changed, isChanged] = useState(false)
+
+  const [customQuizData, updateCustomQuizData] = useState([])
   
   //  I struggled with this part of the code and could not find a solution without creating
   // separate components and state for each group of answers until I learned how to manipulate
@@ -29,19 +36,24 @@ function App() {
   const [choices, setChoices] = useState(initialChoicesArray)
 
   const [answered, setAnswered] = useState(false)
- 
-  
+
   useEffect(() => {
-    // let difficulty = '&difficulty=easy'
-    // let category = '&category=19'
-    let url = `https://opentdb.com/api.php?amount=5`
-    
+    console.log(customQuizData[0].customData.difficulty)
+    let url
+    if (customQuizData) {
+      let difficulty1 = `&difficulty=${customQuizData[0].customData.difficulty}`
+      let category1 = `&category=${customQuizData[0].customData.category}`
+      url = `https://opentdb.com/api.php?amount=5${difficulty1}${category1}`
+      return url
+    } else {
+      url = 'https://opentdb.com/api.php?amount=5'
+    }
     if (!quiz) {
     fetch(url)
       .then(res => res.json())
       .then(data => setQuizData(data.results))
     }
-  }, [quiz])
+  }, [quiz, customQuizData])
 
   
   const startQuiz = () => {
@@ -56,7 +68,6 @@ function App() {
       const correctAnswers = parsedCorrectAnswers.body.firstChild.textContent
       correctAnswerArray.push(correctAnswers)
       setCorrectAnswers(correctAnswerArray)
-      console.log(correctAnswerArray)
       const wrongAnswers = item.incorrect_answers
       const wrongAnswersArray = wrongAnswers.map(item => {
         return {
@@ -87,7 +98,6 @@ function App() {
   }, [quizData])
 
   const checkAnswers = (correctAnswers, choices) => {
-    console.log(choices.filter(choice => typeof choice === 'string'))
     setCount(0)
     for (let i = 0; i < correctAnswers.length; i++){
       if (correctAnswers[i] === choices[i]) {
@@ -101,6 +111,17 @@ function App() {
       setMessage(false)
     }
   }
+
+  const customizeQuiz = () => {
+    isVisible(prevState => !prevState)
+    isChanged(prevState => !prevState)
+  }
+
+  const addCustomCategories = (customData) => {
+    updateCustomQuizData({...customQuizData, customData })
+  }
+
+  console.log(customQuizData.customData)
 
   // Fisher-Yates Shuffle Algorithm
   const shuffle = (array) => {
@@ -152,6 +173,16 @@ function App() {
   return (
     <div className="App">
       <div className="landing-container">
+        <div className={changed ? "customize-container change" : "customize-container"}>
+          <div className="bar1"></div>
+          <div className="bar2"></div>
+          <div className="bar3"></div>
+        </div>
+        <img src={customizeIcon} alt="customize icon" className={changed ? "custom-quizzical change" : "custom-quizzical"} onClick={() => customizeQuiz()} />
+        <QuizCustomization
+          visible={visible}
+          addCustomCategories={addCustomCategories}
+        />
         <div className="yellow-blob"></div>
         <div className="blue-blob"></div>
         { !quiz && <LandingPage onStart={() => startQuiz()} />}

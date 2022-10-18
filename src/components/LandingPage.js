@@ -3,8 +3,6 @@ import logo from '../img/quiz.png'
 
 export default function LandingPage(props) {
 
-  
-
   return (
     <div className="flex-wrapper">
       <div className="content">

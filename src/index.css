@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   background-color: #f5f7fb;
@@ -16,6 +20,95 @@ body {
 
 .flex-wrapper {
   overflow: auto;
+}
+
+.customize-container {
+  display: inline-block;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 38px;
+}
+
+.custom-quizzical {
+  max-width: 35px;
+  position: absolute;
+  right: 8px;
+  top: 40px;
+  filter: opacity(0.6) drop-shadow(0 0 0 blue);
+  transition: 0.4s;
+}
+
+.bar1, .bar2, .bar3 {
+  opacity: 0;
+  width: 30px;
+  height: 5px;
+  background-color: #312e6a;
+  margin:6px 0;
+  transition: 0.4s;
+}
+
+.change > .bar1 {
+  opacity: 1;
+  transform: translate(0, 11px) rotate(-45deg);
+}
+
+.change > .bar3 {
+  opacity: 1;
+  transform: translate(0, -11px) rotate(45deg);
+}
+
+.custom-quizzical.change {
+  filter: opacity(0);
+  transition: .4s;
+}
+
+.quiz-menu {
+  display: flex;
+  position: fixed;
+  right: -120%;
+  top: 75px;
+  flex-direction: column;
+  background-color: #fff;
+  width: 100%;
+  height: 315px;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: left;
+  transition: 0.4s;
+  box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+  z-index: 1;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+}
+
+.quiz-menu.active {
+  right: calc(200px - 100vw);
+}
+
+.input-box {
+  width: 100%;
+  max-width: 150px;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius:10px;
+  border: 1px solid #eee;
+  transition: .3s border-color;
+  font-family: "Inter", sans-serif;
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  max-width: 150px;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  background-color: #dfe0f3;
+  cursor: pointer;
 }
 
 .yellow-blob {
