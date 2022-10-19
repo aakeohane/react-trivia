@@ -4,16 +4,12 @@ import LandingPage from './components/LandingPage'
 import ButtonGroups from './components/ButtonGroups'
 import { nanoid } from 'nanoid'
 import QuizCustomization from './components/QuizCustomization'
-import customizeIcon from './img/slider-icon.png'
 
 function App() {
   // I may add categories and more options for future iterations
 
   const initialChoicesArray = ['','','','','']
   const initialButtonGroupArray = [0]
-  
-  const [visible, isVisible] = useState(false)
-  const [changed, isChanged] = useState(false)
   
   //  I struggled with this part of the code and could not find a solution without creating
   // separate components and state for each group of answers until I learned how to manipulate
@@ -39,16 +35,18 @@ function App() {
   const [options, setOptions] = useState([])
 
   const fetchData = () => {
-    let difficullty = options[0]
-    let category = options[1]
-    let number = options[2]
+    const number = options[2] ? options[2] : '5'
+    const category = options[1] ? `&category=${options[1]}` : ''
+    const difficulty = options[0] ? `&difficulty=${options[0]}` : ''
     let url
     if (customQuizData.length === 0) {
       url = 'https://opentdb.com/api.php?amount=5'
     } else {
-      url = `https://opentdb.com/api.php?amount=${number}`
+      const dynamicUrl = [number, category, difficulty].filter(Boolean).join('')
+      url = `https://opentdb.com/api.php?amount=${dynamicUrl}`
+      setChoices(Array(Number(number)).fill(''))
+      console.log(choices)
     }
-    console.log(url)
     fetch(url)
       .then(res => res.json())
       .then(data => setQuizData(data.results))
@@ -66,7 +64,6 @@ function App() {
         optionsArray.push(difficulty, category, number)
       })
       setOptions(optionsArray)
-      console.log(optionsArray)
   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [customQuizData])
 
@@ -126,11 +123,6 @@ function App() {
     }
   }
 
-  const customizeQuiz = () => {
-    isVisible(prevState => !prevState)
-    isChanged(prevState => !prevState)
-  }
-
   const addCustomCategories = (customization) => {
     updateCustomQuizData(prevState => ({...prevState, customization}))
   }
@@ -186,16 +178,9 @@ function App() {
   return (
     <div className="App">
       <div className="landing-container">
-        <div className={changed ? "customize-container change" : "customize-container"}>
-          <div className="bar1"></div>
-          <div className="bar2"></div>
-          <div className="bar3"></div>
-        </div>
-        <img src={customizeIcon} alt="customize icon" className={changed ? "custom-quizzical change" : "custom-quizzical"} onClick={() => customizeQuiz()} />
-        <QuizCustomization
-          visible={visible}
+        { quiz ? null : <QuizCustomization
           addCustomCategories={addCustomCategories}
-        />
+        /> }
         <div className="yellow-blob"></div>
         <div className="blue-blob"></div>
         { !quiz && <LandingPage onStart={() => startQuiz()} />}
