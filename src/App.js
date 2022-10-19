@@ -193,7 +193,7 @@ function App() {
             </button>}
           { answered && 
             <div className="play-again-container">
-              <p>You scored {count}/5 correct answers</p>
+              <p>You scored {count}/{options[2]} correct answers</p>
               <button className="quizzical-button"
                 onClick={() => resetGame()}>Play again
               </button>

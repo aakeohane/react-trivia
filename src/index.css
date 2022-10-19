@@ -289,6 +289,15 @@ a {
   opacity: 0.6;
 }
 
+.error-message {
+  position: absolute;
+  top: 244px;
+  z-index: 2;
+  font-size: 10px;
+  font-family: "Inter", sans-serif;
+  color: lightcoral;
+}
+
 @media all and (min-width: 480px) {
   .answers-btn {
     padding: 8px 25px;

@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import customizeIcon from '../img/slider-icon.png'
+import {omit} from 'lodash'
 
 export default function QuizCustomization(props) {
   // this is the important property to transfer data from child to parent to access custom options
@@ -14,8 +15,30 @@ export default function QuizCustomization(props) {
     number: '5'
   })
 
+  const [errors, setError] = useState({})
+
+  const validate = (id, value) => {
+    switch (id) {
+      case 'number':
+        if ((value < 5) || (value > 10)) {
+          setError({
+            ...errors,
+            number: "Value must be between 5 and 10"
+          })
+        } else {
+          let newObj = omit(errors, 'number')
+          setError(newObj)
+        }
+      break
+      default: break
+    }
+  }
+
   const handleChange = (event) => {
     setCustomization({...customization, [event.target.id]: event.target.value})
+    let id = event.target.id;
+    let value = event.target.value;
+    validate(id, value)
   }
 
   const generateCustomQuizData = (event) => {
@@ -82,6 +105,9 @@ export default function QuizCustomization(props) {
           min="5"
           max="10"
         />
+        {
+          errors.number && <div className="error-message">{errors.number}</div>
+        }
         <button className="submit-button" type="submit" onClick={generateCustomQuizData}>Submit</button>
       </form>
 
