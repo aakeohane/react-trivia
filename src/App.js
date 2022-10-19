@@ -14,8 +14,6 @@ function App() {
   
   const [visible, isVisible] = useState(false)
   const [changed, isChanged] = useState(false)
-
-  const [customQuizData, updateCustomQuizData] = useState([])
   
   //  I struggled with this part of the code and could not find a solution without creating
   // separate components and state for each group of answers until I learned how to manipulate
@@ -37,25 +35,41 @@ function App() {
 
   const [answered, setAnswered] = useState(false)
 
-  useEffect(() => {
-    console.log(customQuizData[0].customData.difficulty)
+  const [customQuizData, updateCustomQuizData] = useState([])
+  const [options, setOptions] = useState([])
+
+  const fetchData = () => {
+    let difficullty = options[0]
+    let category = options[1]
+    let number = options[2]
     let url
-    if (customQuizData) {
-      let difficulty1 = `&difficulty=${customQuizData[0].customData.difficulty}`
-      let category1 = `&category=${customQuizData[0].customData.category}`
-      url = `https://opentdb.com/api.php?amount=5${difficulty1}${category1}`
-      return url
-    } else {
+    if (customQuizData.length === 0) {
       url = 'https://opentdb.com/api.php?amount=5'
+    } else {
+      url = `https://opentdb.com/api.php?amount=${number}`
     }
-    if (!quiz) {
+    console.log(url)
     fetch(url)
       .then(res => res.json())
       .then(data => setQuizData(data.results))
-    }
-  }, [quiz, customQuizData])
+  }
 
-  
+  useEffect(() => {
+    fetchData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [options])
+
+  useEffect(() => {
+      const optionsArray = []
+      Object.values(customQuizData).forEach(val => {
+        const [difficulty, category, number ] = [val.difficulty, val.category, val.number]
+        optionsArray.push(difficulty, category, number)
+      })
+      setOptions(optionsArray)
+      console.log(optionsArray)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [customQuizData])
+
   const startQuiz = () => {
     setQuiz(true)
   }
@@ -117,11 +131,9 @@ function App() {
     isChanged(prevState => !prevState)
   }
 
-  const addCustomCategories = (customData) => {
-    updateCustomQuizData({...customQuizData, customData })
+  const addCustomCategories = (customization) => {
+    updateCustomQuizData(prevState => ({...prevState, customization}))
   }
-
-  console.log(customQuizData.customData)
 
   // Fisher-Yates Shuffle Algorithm
   const shuffle = (array) => {
@@ -168,6 +180,7 @@ function App() {
     // modifying state directly, but not sure how else to do this, 
     // have to reset choices state
     setChoices(initialChoicesArray)
+    fetchData()
   }
 
   return (

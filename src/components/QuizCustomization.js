@@ -18,7 +18,6 @@ export default function QuizCustomization(props) {
   const generateCustomQuiz = (event) => {
     event.preventDefault()
     addCustomCategories(customization)
-    // setCustomQuizData({ difficulty: '', category: '', number: '5'})
   }
 
   return (
