@@ -96,7 +96,6 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-
 .input-box.active {
   transition: none;
   border: 1px solid red;

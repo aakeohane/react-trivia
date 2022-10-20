@@ -9,7 +9,6 @@ function App() {
   // I may add categories and more options for future iterations
 
   const initialChoicesArray = ['','','','','']
-  const initialButtonGroupArray = ['','','','','']
   const initialOptionsArray = {
     difficulty: '',
     category: '',
@@ -21,7 +20,6 @@ function App() {
   // the arrays based on index similar to choices array. May also add each as a property to further consolidate state
   // if button is clicked change color, remove color and add
   // color if another button is clicked
-  const [buttonGroup, setButtonGroup] = useState(initialButtonGroupArray)
   
   const [buttonArray, setButtonArray] = useState([])
 
@@ -69,7 +67,6 @@ function App() {
         setOptions(optionsArray)
         let newBlankArray = new Array(Number(optionsArray[2])).fill('')
         setChoices(newBlankArray)
-        setButtonGroup(newBlankArray)
       }
   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [customQuizData])
@@ -159,9 +156,7 @@ function App() {
             answered={answered}
             choices={choices}
             setChoices={setChoices}
-            buttonGroup={buttonGroup}
-            setButtonGroup={setButtonGroup}
-            isSelected={buttonGroup[item.index] === item.id ? true : false} />
+            isSelected={choices[item.index] === answers ? true : false} />
         )
     })
       return (
@@ -178,7 +173,6 @@ function App() {
     // modifying state directly, but not sure how else to do this, 
     // have to reset choices state
     fetchData()
-    setButtonGroup(initialButtonGroupArray)
     setChoices(initialChoicesArray)
     setOptions(initialOptionsArray)
   }
