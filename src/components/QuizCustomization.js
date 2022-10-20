@@ -43,6 +43,12 @@ export default function QuizCustomization(props) {
 
   const generateCustomQuizData = (event) => {
     event.preventDefault()
+    let number = Number(customization.number)
+    if ((number > 10) || (number < 5)) {
+      return
+    }
+    isVisible(prevState => !prevState)
+    isChanged(prevState => !prevState)
     addCustomCategories(customization)
   }
 
@@ -59,7 +65,7 @@ export default function QuizCustomization(props) {
           <div className="bar3"></div>
       </div>
       <img src={customizeIcon} alt="customize icon" className={changed ? "custom-quizzical change" : "custom-quizzical"} onClick={() => customizeQuiz()} />
-      <form className={visible ? 'quiz-menu active' : 'quiz-menu'}>
+      <form className={visible ? 'quiz-menu on-screen' : 'quiz-menu'}>
         <label htmlFor="difficulty">Select Difficulty:</label>
         <select
           id='difficulty'
@@ -99,7 +105,7 @@ export default function QuizCustomization(props) {
         <input
           type="number"
           id="number"
-          className="input-box" 
+          className={ errors.number ? "input-box active" : "input-box"} 
           value={customization.number}
           onChange={handleChange}
           min="5"

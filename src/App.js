@@ -9,7 +9,12 @@ function App() {
   // I may add categories and more options for future iterations
 
   const initialChoicesArray = ['','','','','']
-  const initialButtonGroupArray = [0]
+  const initialButtonGroupArray = ['','','','','']
+  const initialOptionsArray = {
+    difficulty: '',
+    category: '',
+    number: '5'
+  }
   
   //  I struggled with this part of the code and could not find a solution without creating
   // separate components and state for each group of answers until I learned how to manipulate
@@ -32,21 +37,18 @@ function App() {
   const [answered, setAnswered] = useState(false)
 
   const [customQuizData, updateCustomQuizData] = useState([])
-  const [options, setOptions] = useState([])
+  const [options, setOptions] = useState(initialOptionsArray)
 
   const fetchData = () => {
-    const number = options[2] ? options[2] : '5'
-    const category = options[1] ? `&category=${options[1]}` : ''
-    const difficulty = options[0] ? `&difficulty=${options[0]}` : ''
-    let url
-    if (customQuizData.length === 0) {
-      url = 'https://opentdb.com/api.php?amount=5'
-    } else {
-      const dynamicUrl = [number, category, difficulty].filter(Boolean).join('')
-      url = `https://opentdb.com/api.php?amount=${dynamicUrl}`
-      setChoices(Array(Number(number)).fill(''))
-      console.log(choices)
-    }
+    // this works for now, but still should destructure object properly when changing options
+    const optionsArray = Object.values(options)
+    const number = `${optionsArray[2]}`
+    const category = `&category=${optionsArray[1]}`
+    const difficulty = `&difficulty=${optionsArray[0]}`
+
+    const dynamicUrl = [number, category, difficulty].filter(Boolean).join('')
+    const url = `https://opentdb.com/api.php?amount=${dynamicUrl}`
+    
     fetch(url)
       .then(res => res.json())
       .then(data => setQuizData(data.results))
@@ -60,10 +62,15 @@ function App() {
   useEffect(() => {
       const optionsArray = []
       Object.values(customQuizData).forEach(val => {
-        const [difficulty, category, number ] = [val.difficulty, val.category, val.number]
+        const [ difficulty, category, number ] = [val.difficulty, val.category, val.number]
         optionsArray.push(difficulty, category, number)
       })
-      setOptions(optionsArray)
+      if (customQuizData.length !== 0) {
+        setOptions(optionsArray)
+        let newBlankArray = new Array(Number(optionsArray[2])).fill('')
+        setChoices(newBlankArray)
+        setButtonGroup(newBlankArray)
+      }
   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [customQuizData])
 
@@ -105,7 +112,6 @@ function App() {
       
     })
     setButtonArray(bigArray)
-      
   }, [quizData])
 
   const checkAnswers = (correctAnswers, choices) => {
@@ -155,7 +161,7 @@ function App() {
             setChoices={setChoices}
             buttonGroup={buttonGroup}
             setButtonGroup={setButtonGroup}
-            active={buttonGroup[item.index] === item.id ? true : false} />
+            isSelected={buttonGroup[item.index] === item.id ? true : false} />
         )
     })
       return (
@@ -171,8 +177,10 @@ function App() {
     setAnswered(false)
     // modifying state directly, but not sure how else to do this, 
     // have to reset choices state
-    setChoices(initialChoicesArray)
     fetchData()
+    setButtonGroup(initialButtonGroupArray)
+    setChoices(initialChoicesArray)
+    setOptions(initialOptionsArray)
   }
 
   return (
@@ -183,7 +191,7 @@ function App() {
         /> }
         <div className="yellow-blob"></div>
         <div className="blue-blob"></div>
-        { !quiz && <LandingPage onStart={() => startQuiz()} />}
+        { !quiz && <LandingPage options={options} onStart={() => startQuiz()} />}
         <div className="quiz-container">
           { quiz && quizQuestions}
           { message && <p className="message">You must answer all questions!</p> }
@@ -193,7 +201,7 @@ function App() {
             </button>}
           { answered && 
             <div className="play-again-container">
-              <p>You scored {count}/{options[2]} correct answers</p>
+              <p>You scored {count}/{choices.length} correct answers</p>
               <button className="quizzical-button"
                 onClick={() => resetGame()}>Play again
               </button>
