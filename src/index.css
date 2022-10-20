@@ -96,13 +96,15 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+
 .input-box.active {
   transition: none;
-  outline: 5px auto red;
+  border: 1px solid red;
 }
 
 .input-box.active:focus {
-  outline: 5px auto red;
+  outline: none;
+  border: 1px solid red;
 }
 
 .submit-button {
