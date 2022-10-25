@@ -3,18 +3,18 @@ import React from "react";
 const ButtonGroups = props => {
   
 
-  const [isSelected, answered, isCorrect, fixedAnswers, index, id] = [props.isSelected, props.answered, props.isCorrect, props.fixedAnswers, props.index, props.id]
+  const [isSelected, answered, isCorrect, fixedAnswers, index, id, choices, setChoices] = [props.isSelected, props.answered, props.isCorrect, props.fixedAnswers, props.index, props.id, props.choices, props.setChoices]
 
   const clickHandler = () => {
     // array for storing chosen answer and highlighting pick on click
-    // const newChoices = [...props.choices]
-    // newChoices.splice(index, 1, fixedAnswers)
-    // props.setChoices(newChoices)
+    const newChoices = [...choices]
+    newChoices.splice(index, 1, fixedAnswers)
+    setChoices(newChoices)
 
-    // splice adds weird Array(1), returning empty array i think, at end of array but still works above is cleaner on console??
-    props.setChoices(prevState => [
-      ...props.choices, prevState.splice(index, 1, fixedAnswers)
-    ])
+    // this method adds weird Array(1), returning empty array, at end of array but still works above is cleaner on console??
+    // props.setChoices(prevState => [
+    //   ...prevState, prevState.splice(index, 1, fixedAnswers)
+    // ])
   }
 
     return (

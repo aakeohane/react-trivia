@@ -27,14 +27,14 @@ body {
   cursor: pointer;
   position: absolute;
   right: 10px;
-  top: 38px;
+  top: 18px;
 }
 
 .custom-quizzical {
   max-width: 35px;
   position: absolute;
   right: 8px;
-  top: 40px;
+  top: 20px;
   filter: opacity(0.6) drop-shadow(0 0 0 blue);
   transition: 0.4s;
 }
@@ -48,17 +48,17 @@ body {
   transition: 0.4s;
 }
 
-.change > .bar1 {
+.visible > .bar1 {
   opacity: 1;
   transform: translate(0, 11px) rotate(-45deg);
 }
 
-.change > .bar3 {
+.visible > .bar3 {
   opacity: 1;
   transform: translate(0, -11px) rotate(45deg);
 }
 
-.custom-quizzical.change {
+.custom-quizzical.visible {
   filter: opacity(0);
   transition: .4s;
 }
@@ -67,7 +67,7 @@ body {
   display: flex;
   position: fixed;
   right: -120%;
-  top: 75px;
+  top: 55px;
   flex-direction: column;
   background-color: #fff;
   width: 100%;
@@ -213,6 +213,20 @@ a {
   cursor: pointer;
 }
 
+.reset-button {
+  background-color: #4d5b9e;
+  color: #f5f7fb;
+  width: 100%;
+  max-width: 150px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
 .quizzical-button:hover {
   opacity: 0.8;
   transition: 1s;
@@ -309,6 +323,7 @@ a {
   .answers-btn {
     padding: 8px 25px;
   }
+
 }
 
 /* the stupid galaxy fold and other phones */
@@ -323,6 +338,7 @@ a {
 
   .quiz-container {
     margin: 0 auto;
+    padding-top: 40px;
   }
 
   .play-again-container button {

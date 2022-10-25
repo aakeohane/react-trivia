@@ -6,20 +6,16 @@ import { nanoid } from 'nanoid'
 import QuizCustomization from './components/QuizCustomization'
 
 function App() {
-  // I may add categories and more options for future iterations
 
+  // have to start with five blank strings in initial Choices, these will be filled as user chooses answers 
+  // in reference to index position of quiz. I use the blank string as a reference later for whether user has answered
+  // all questions in quiz. I wasnt sure a better way to handle this logic.
   const initialChoicesArray = ['','','','','']
   const initialOptionsArray = {
     difficulty: '',
     category: '',
     number: '5'
   }
-  
-  //  I struggled with this part of the code and could not find a solution without creating
-  // separate components and state for each group of answers until I learned how to manipulate
-  // the arrays based on index similar to choices array. May also add each as a property to further consolidate state
-  // if button is clicked change color, remove color and add
-  // color if another button is clicked
   
   const [buttonArray, setButtonArray] = useState([])
 
@@ -37,8 +33,9 @@ function App() {
   const [customQuizData, updateCustomQuizData] = useState([])
   const [options, setOptions] = useState(initialOptionsArray)
 
+  const [visible, isVisible] = useState(false)
+
   const fetchData = () => {
-    // this works for now, but still should destructure object properly when changing options
     const optionsArray = Object.values(options)
     const number = `${optionsArray[2]}`
     const category = `&category=${optionsArray[1]}`
@@ -68,11 +65,11 @@ function App() {
         let newBlankArray = new Array(Number(optionsArray[2])).fill('')
         setChoices(newBlankArray)
       }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [customQuizData])
 
   const startQuiz = () => {
     setQuiz(true)
+    isVisible(false)
   }
 
   useEffect(() => {
@@ -174,15 +171,19 @@ function App() {
     // have to reset choices state
     fetchData()
     setChoices(initialChoicesArray)
-    setOptions(initialOptionsArray)
   }
 
   return (
     <div className="App">
       <div className="landing-container">
-        { quiz ? null : <QuizCustomization
+        <QuizCustomization
           addCustomCategories={addCustomCategories}
-        /> }
+          options={options}
+          quiz={quiz}
+          visible={visible}
+          isVisible={isVisible}
+          resetGame={resetGame}
+        />
         <div className="yellow-blob"></div>
         <div className="blue-blob"></div>
         { !quiz && <LandingPage options={options} onStart={() => startQuiz()} />}

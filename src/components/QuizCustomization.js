@@ -4,15 +4,13 @@ import {omit} from 'lodash'
 
 export default function QuizCustomization(props) {
   // this is the important property to transfer data from child to parent to access custom options
-  const [addCustomCategories] = [props.addCustomCategories]
+  const [addCustomCategories, options, quiz, visible, isVisible] = [props.addCustomCategories, props.options, props.quiz, props.visible, props.isVisible]
 
-  const [visible, isVisible] = useState(false)
-  const [changed, isChanged] = useState(false)
 
   const [customization, setCustomization] = useState({
-    difficulty: '',
-    category: '',
-    number: '5'
+    difficulty: options[0] || '',
+    category: options[1] || '',
+    number: options[2] || '5'
   })
 
   const [errors, setError] = useState({})
@@ -48,32 +46,35 @@ export default function QuizCustomization(props) {
       return
     }
     isVisible(prevState => !prevState)
-    isChanged(prevState => !prevState)
     addCustomCategories(customization)
   }
 
   const toggleCustomMenu = () => {
     isVisible(prevState => !prevState)
-    isChanged(prevState => !prevState)
     let number = Number(customization.number)
     if ((!number) || (number < 5) || (number > 10)) {
       setCustomization(prevState => (
-        {...prevState, number: '5'}
+        {...prevState, number: options[2] || '5'}
       ))
       let newObj = omit(errors, 'number')
       setError(newObj)
     }
   }
 
+  const resetQuiz = () => {
+    props.resetGame()
+    isVisible(false)
+  }
+
   return (
-    <div>
-      <div className={changed ? "customize-container change" : "customize-container"}>
+    <div className="preference-container">
+      <div className={visible ? "customize-container visible" : "customize-container"}>
           <div className="bar1"></div>
           <div className="bar2"></div>
           <div className="bar3"></div>
       </div>
-      <img src={customizeIcon} alt="customize icon" className={changed ? "custom-quizzical change" : "custom-quizzical"} onClick={() => toggleCustomMenu()} />
-      <form className={visible ? 'quiz-menu on-screen' : 'quiz-menu'}>
+      <img src={customizeIcon} alt="customize icon" className={visible ? "custom-quizzical visible" : "custom-quizzical"} onClick={() => toggleCustomMenu()} />
+      {!quiz ? <form className={visible ? 'quiz-menu on-screen' : 'quiz-menu'}>
         <label htmlFor="difficulty">Select Difficulty:</label>
         <select
           id='difficulty'
@@ -123,7 +124,10 @@ export default function QuizCustomization(props) {
           errors.number && <div className="error-message">{errors.number}</div>
         }
         <button className="submit-button" type="submit" onClick={generateCustomQuizData}>Submit</button>
-      </form>
+      </form> : 
+        <div className={visible ? 'quiz-menu on-screen' : 'quiz-menu'}>
+          <button className="reset-button" type="submit" onClick={resetQuiz}>Reset</button>
+        </div> }
 
     </div>
   )
