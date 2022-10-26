@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import LandingPage from './components/LandingPage'
 import ButtonGroups from './components/ButtonGroups'
 import { nanoid } from 'nanoid'
 import QuizCustomization from './components/QuizCustomization'
 
-function App() {
+import BeatLoader from "react-spinners/BeatLoader";
 
+
+function App() {
   // have to start with five blank strings in initial Choices, these will be filled as user chooses answers 
   // in reference to index position of quiz. I use the blank string as a reference later for whether user has answered
   // all questions in quiz. I wasnt sure a better way to handle this logic.
@@ -16,6 +17,8 @@ function App() {
     category: '',
     number: '5'
   }
+
+  const [loading, isLoading] = useState(false)
   
   const [buttonArray, setButtonArray] = useState([])
 
@@ -69,6 +72,9 @@ function App() {
 
   const startQuiz = () => {
     setQuiz(true)
+    // fake loader if the quiz doesnt load content quick enough, coudlnt figure out how to properly do it with fetch
+    isLoading(true)
+    setTimeout(() => { isLoading(false) }, 800)
     isVisible(false)
   }
 
@@ -169,6 +175,7 @@ function App() {
     setAnswered(false)
     fetchData()
     setChoices(initialChoicesArray)
+    setMessage(false)
   }
 
   return (
@@ -190,21 +197,24 @@ function App() {
             onStart={() => startQuiz()}
             isVisible={isVisible}
           />}
-        <div className="quiz-container">
-          { quiz && quizQuestions}
-          { message && <p className="message">You must answer all questions!</p> }
-          { quiz && !answered && 
-            <button className="quizzical-button" 
-              onClick={() => checkAnswers(correctAnswers, choices)}>Check answers
-            </button>}
-          { answered && 
-            <div className="play-again-container">
-              <p>You scored {count}/{choices.length} correct answers</p>
-              <button className="quizzical-button"
-                onClick={() => resetGame()}>Play again
-              </button>
-            </div>}
-        </div>
+          {loading ? <BeatLoader color={'#ccccff'} size={25} /> :
+            <div className="quiz-container">
+            { quiz && quizQuestions}
+            { message && <p className="message">You must answer all questions!</p> }
+            { quiz && !answered && 
+              <button className="quizzical-button" 
+                onClick={() => checkAnswers(correctAnswers, choices)}>Check answers
+              </button>}
+            { answered && 
+              <div className="play-again-container">
+                <p>You scored {count}/{choices.length} correct answers</p>
+                <button className="quizzical-button"
+                  onClick={() => resetGame()}>Play again
+                </button>
+              </div> }
+            </div> 
+          }
+
       </div>
     </div>
   );
