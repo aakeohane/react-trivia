@@ -11,7 +11,9 @@ const ButtonGroups = props => {
     newChoices.splice(index, 1, fixedAnswers)
     setChoices(newChoices)
 
-    // this method adds weird Array(1), returning empty array, at end of array but still works above is cleaner on console??
+    // this method below adds weird Array(1), returning empty array, at end of array but still works, however the additional arrays
+    // cayse glitch effecting total count function for questions when clicking mutiple times.
+
     // props.setChoices(prevState => [
     //   ...prevState, prevState.splice(index, 1, fixedAnswers)
     // ])
