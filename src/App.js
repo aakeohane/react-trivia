@@ -167,8 +167,6 @@ function App() {
   const resetGame = () => {
     setQuiz(false)
     setAnswered(false)
-    // modifying state directly, but not sure how else to do this, 
-    // have to reset choices state
     fetchData()
     setChoices(initialChoicesArray)
   }
@@ -186,7 +184,12 @@ function App() {
         />
         <div className="yellow-blob"></div>
         <div className="blue-blob"></div>
-        { !quiz && <LandingPage options={options} onStart={() => startQuiz()} />}
+        { !quiz && 
+          <LandingPage 
+            options={options} 
+            onStart={() => startQuiz()}
+            isVisible={isVisible}
+          />}
         <div className="quiz-container">
           { quiz && quizQuestions}
           { message && <p className="message">You must answer all questions!</p> }

@@ -75,6 +75,9 @@ export default function QuizCustomization(props) {
       </div>
       <img src={customizeIcon} alt="customize icon" className={visible ? "custom-quizzical visible" : "custom-quizzical"} onClick={() => toggleCustomMenu()} />
       {!quiz ? <form className={visible ? 'quiz-menu on-screen' : 'quiz-menu'}>
+        <h1 className="quiz-menu-header">Settings</h1>
+        <div className="yellow-blob-settings"></div>
+        <div className="blue-blob-settings"></div>
         <label htmlFor="difficulty">Select Difficulty:</label>
         <select
           id='difficulty'
@@ -126,6 +129,12 @@ export default function QuizCustomization(props) {
         <button className="submit-button" type="submit" onClick={generateCustomQuizData}>Submit</button>
       </form> : 
         <div className={visible ? 'quiz-menu on-screen' : 'quiz-menu'}>
+          <div className="yellow-blob-settings"></div>
+          <div className="blue-blob-settings"></div>
+          <h1 className="quiz-menu-header">Settings</h1>
+          <div className="settings-text-container">
+            <p className="settings-text">A bit too difficult? Reset quiz and go back to the homescreen to try again.</p>
+          </div>
           <button className="reset-button" type="submit" onClick={resetQuiz}>Reset</button>
         </div> }
 
