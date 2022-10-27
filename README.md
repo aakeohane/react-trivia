@@ -4,6 +4,9 @@ Solo project to further test my React skills and become even more familiar with 
 
 Project: [Quizzical](https://aakeohane.github.io/react-trivia/)
 
+<img src="src/img/quizzical-sample.png" width="400" alt="screen of homepage for quizzical">
+<img src ="src/img/quizzical-sample-questions.png" width="400" alt="screen of answers displaying correct and incorrect choices">
+
 ## Features ✅
 
 - Quiz Data is loaded from [the Open Trivia Database](https://opentdb.com/api_config.php)
