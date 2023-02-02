@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/react-trivia/static/css/main.7130b61d.chunk.css",
-    "main.js": "/react-trivia/static/js/main.059f0935.chunk.js",
-    "main.js.map": "/react-trivia/static/js/main.059f0935.chunk.js.map",
+    "main.js": "/react-trivia/static/js/main.e263cdb6.chunk.js",
+    "main.js.map": "/react-trivia/static/js/main.e263cdb6.chunk.js.map",
     "runtime-main.js": "/react-trivia/static/js/runtime-main.309d9916.js",
     "runtime-main.js.map": "/react-trivia/static/js/runtime-main.309d9916.js.map",
     "static/js/2.73eb87bd.chunk.js": "/react-trivia/static/js/2.73eb87bd.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.309d9916.js",
     "static/js/2.73eb87bd.chunk.js",
     "static/css/main.7130b61d.chunk.css",
-    "static/js/main.059f0935.chunk.js"
+    "static/js/main.e263cdb6.chunk.js"
   ]
 }
