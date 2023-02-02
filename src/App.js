@@ -43,9 +43,11 @@ function App() {
     const number = `${optionsArray[2]}`
     const category = `&category=${optionsArray[1]}`
     const difficulty = `&difficulty=${optionsArray[0]}`
-
-    const dynamicUrl = [number, category, difficulty].filter(Boolean).join('')
+    let newBlankArray = new Array(Number(optionsArray[2])).fill('')
+    setChoices(newBlankArray)
+    const dynamicUrl = [number, category, difficulty].join('')
     const url = `https://opentdb.com/api.php?amount=${dynamicUrl}`
+    console.log(url)
     
     fetch(url)
       .then(res => res.json())
@@ -174,7 +176,6 @@ function App() {
     setQuiz(false)
     setAnswered(false)
     fetchData()
-    setChoices(initialChoicesArray)
     setMessage(false)
   }
 
