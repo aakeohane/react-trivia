@@ -52,11 +52,8 @@ function App() {
     fetch(url)
       .then(res => res.json())
       .then(data => {
-        setQuizData(data.results)
-      })
-      .catch((err) => console.error(err))
-      .finally(() => {
         isLoading(prevState => !prevState)
+        setQuizData(data.results)
       })
   }
 
