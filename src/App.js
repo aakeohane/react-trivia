@@ -39,6 +39,7 @@ function App() {
   const [visible, isVisible] = useState(false)
 
   const fetchData = () => {
+    isLoading(true)
     const optionsArray = Object.values(options)
     const number = `${optionsArray[2]}`
     const category = `&category=${optionsArray[1]}`
@@ -47,14 +48,20 @@ function App() {
     setChoices(newBlankArray)
     const dynamicUrl = [number, category, difficulty].join('')
     const url = `https://opentdb.com/api.php?amount=${dynamicUrl}`
-    console.log(url)
     
     fetch(url)
       .then(res => res.json())
-      .then(data => setQuizData(data.results))
+      .then(data => {
+        setQuizData(data.results)
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {
+        isLoading(prevState => !prevState)
+      })
   }
 
   useEffect(() => {
+    isLoading(true)
     fetchData()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options])
@@ -74,9 +81,6 @@ function App() {
 
   const startQuiz = () => {
     setQuiz(true)
-    // fake loader if the quiz doesnt load content quick enough, coudlnt figure out how to properly do it with fetch
-    isLoading(true)
-    setTimeout(() => { isLoading(false) }, 800)
     isVisible(false)
   }
 
@@ -198,7 +202,8 @@ function App() {
             onStart={() => startQuiz()}
             isVisible={isVisible}
           />}
-          {loading ? <BeatLoader color={'#ccccff'} size={25} /> :
+          {/* below sets loader while info is being fetched */}
+          {(loading && quiz) ? <BeatLoader color={'#ccccff'} size={25} /> :
             <div className="quiz-container">
             { quiz && quizQuestions}
             { message && <p className="message">You must answer all questions!</p> }

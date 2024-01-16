@@ -15,6 +15,9 @@
     "react-spinners": "^0.13.6",
     "web-vitals": "^1.1.2"
   },
+  "optionalDependencies": {
+    "babel-loader": "8.1.0"
+  },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
