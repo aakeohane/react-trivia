@@ -87,7 +87,7 @@ function App() {
   useEffect(() => {
     const bigArray = []
     const correctAnswerArray = []
-    quizData.map((item, index) => {
+    quizData?.map((item, index) => {
       const parsedCorrectAnswers = new DOMParser().parseFromString(item.correct_answer, "text/html")
       const correctAnswers = parsedCorrectAnswers.body.firstChild.textContent
       correctAnswerArray.push(correctAnswers)
