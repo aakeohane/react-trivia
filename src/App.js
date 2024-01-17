@@ -52,8 +52,11 @@ function App() {
     fetch(url)
       .then(res => res.json())
       .then(data => {
-        isLoading(prevState => !prevState)
         setQuizData(data.results)
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {
+        isLoading(prevState => !prevState)
       })
   }
 
@@ -84,6 +87,7 @@ function App() {
   useEffect(() => {
     const bigArray = []
     const correctAnswerArray = []
+    // "?" checks if quizData exists, sometime fetch pulls undefined and app crashes, this wont run map if undefined
     quizData?.map((item, index) => {
       const parsedCorrectAnswers = new DOMParser().parseFromString(item.correct_answer, "text/html")
       const correctAnswers = parsedCorrectAnswers.body.firstChild.textContent
