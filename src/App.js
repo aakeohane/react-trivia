@@ -53,11 +53,13 @@ function App() {
       .then(res => res.json())
       .then(data => {
         setQuizData(data.results)
+        console.log("fetched")
       })
       .catch((err) => console.error(err))
       .finally(() => {
         isLoading(prevState => !prevState)
       })
+      
   }
 
   useEffect(() => {
@@ -85,6 +87,7 @@ function App() {
   }
 
   useEffect(() => {
+    
     const bigArray = []
     const correctAnswerArray = []
     // "?" checks if quizData exists, sometime fetch pulls undefined and app crashes, this wont run map if undefined
@@ -119,6 +122,7 @@ function App() {
       
     })
     setButtonArray(bigArray)
+    console.log(bigArray)
   }, [quizData])
 
   const checkAnswers = (correctAnswers, choices) => {
@@ -207,8 +211,10 @@ function App() {
           {(loading && quiz) ? <BeatLoader color={'#ccccff'} size={25} /> :
             <div className="quiz-container">
             { quiz && quizQuestions}
+            {/*  below safeguards for when fetch happens too quickly in between api calls => error code 429 */}
+            { quiz && (buttonArray.length === 0) && <p className="fetch-error">Oops, something went wrong! Try resetting the quiz after a few seconds.</p>}
             { message && <p className="message">You must answer all questions!</p> }
-            { quiz && !answered && 
+            { quiz && !answered && !(buttonArray.length === 0) &&
               <button className="quizzical-button" 
                 onClick={() => checkAnswers(correctAnswers, choices)}>Check answers
               </button>}
