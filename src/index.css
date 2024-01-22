@@ -84,7 +84,7 @@ body {
 }
 
 .custom-quizzical.visible {
-  filter: opacity(0);
+  opacity: 0;
   transition: 0.4s;
 }
 
