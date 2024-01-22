@@ -57,9 +57,9 @@ body {
   position: absolute;
   right: 8px;
   top: 20px;
-  filter: opacity(0.6) drop-shadow(0 0 0 blue);
   transition: 0.4s;
   cursor: pointer;
+  z-index: 100;
 }
 
 .bar1,
