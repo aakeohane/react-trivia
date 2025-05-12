@@ -49,7 +49,7 @@ body {
   cursor: pointer;
   position: absolute;
   right: 13px;
-  top: 38px;
+  top: 18px;
   z-index: 10;
 }
 
@@ -57,7 +57,7 @@ body {
   max-width: 35px;
   position: absolute;
   right: 11px;
-  top: 40px;
+  top: 20px;
   transition: 0.4s;
   cursor: pointer;
   z-index: 11;
@@ -98,7 +98,7 @@ body {
   display: flex;
   position: fixed;
   right: -120%;
-  top: 35px;
+  top: 15px;
   flex-direction: column;
   background-color: #fff;
   width: 100%;
