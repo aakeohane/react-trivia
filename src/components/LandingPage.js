@@ -63,7 +63,7 @@ export default function LandingPage(props) {
         <img src={logo} alt="quizzical logo" className="quizzical-logo" />
         <h1>Quizzical</h1>
         <p> Test your knowledge! When you start the quiz, you will have to answer { options[2] ? options[2] : 5}{ options[1] ? ` ${category} questions` :  ` random questions` }. 
-        Modify quiz preferences <span className="modify-settings" onClick={showMenu}>above</span>. Good luck!</p>
+        Modify quiz preferences in <span className="modify-settings" onClick={showMenu}>settings</span>. Good luck!</p>
         <button className="quizzical-button" onClick={onStart}> Start quiz!</button>
       </div>
       <div className="footer">
