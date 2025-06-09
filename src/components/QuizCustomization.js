@@ -74,7 +74,7 @@ export default function QuizCustomization(props) {
           <div className="bar3"></div>
       </div>
       <img src={customizeIcon} alt="customize icon" className={visible ? "custom-quizzical visible" : "custom-quizzical"} onClick={() => toggleCustomMenu()} />
-      {!quiz ? <form className={visible ? 'quiz-menu on-screen' : 'quiz-menu'}>
+      {!quiz ? <form {...{inert: isVisible ? undefined : "inert"} } className={visible ? 'quiz-menu on-screen' : 'quiz-menu'}>
         <h1 className="quiz-menu-header">Settings</h1>
         <div className="yellow-blob-settings"></div>
         <div className="blue-blob-settings"></div>
